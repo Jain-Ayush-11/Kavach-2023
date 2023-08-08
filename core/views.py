@@ -24,3 +24,4 @@ class WatchlistList(generics.ListCreateAPIView):
     queryset = Watchlist.objects.all()
     serializer_class = WatchlistSerializer
 
+
