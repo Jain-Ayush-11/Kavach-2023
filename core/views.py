@@ -16,15 +16,15 @@ from django.http import JsonResponse
 
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 
-options = ChromeOptions()
-# options.add_argument("--headless=new")
-# options.add_argument('--disable-gpu')
-
 skip_count = 47
 
-driver = webdriver.Chrome(options=options)
-
 def get_website_report(url=None):
+
+    options = ChromeOptions()
+    options.add_argument("--headless=new")
+    options.add_argument('--disable-gpu')
+
+    driver = webdriver.Chrome(options=options)
 
     driver = webdriver.Chrome(options=options)
 
@@ -39,6 +39,8 @@ def get_website_report(url=None):
     generate_scan.click()
 
     time.sleep(5.0)
+
+    driver.exit()
     
     return driver.current_url
 

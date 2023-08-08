@@ -16,14 +16,15 @@ class SocialMedia(models.Model):
     profile_summary = models.TextField(default="")
 
 class Transaction(models.Model):
-    address = models.CharField(max_length=512, unique=True)
-    type_of_event = models.CharField(max_length=255, null=True, blank=True)
-    sender_address = models.CharField(max_length=512, null=True, blank=True)
-    recipient_address = models.CharField(max_length=255, null=True, blank=True)
-    time_of_transaction = models.DateTimeField(null=True, blank=True)
-    previous_report = models.CharField(max_length=255, null=True, blank=True)
-    block_height = models.CharField(max_length=255, null=True, blank=True)
-    type_of_blockchain = models.CharField(max_length=255, null=True, blank=True)
+    transactionHash = models.CharField(max_length=64, blank=True, null=True)
+    type = models.CharField(max_length=10, blank=True, null=True)
+    logo = models.URLField(blank=True, null=True)
+    sender = models.CharField(max_length=34, blank=True, null=True)
+    amount = models.CharField(max_length=20, blank=True, null=True)
+    reciever_to = models.CharField(max_length=34, blank=True, null=True)
+    reciever_amount = models.CharField(max_length=20, blank=True, null=True)
+    time = models.DateTimeField(blank=True, null=True)
+
 
 class Watchlist(models.Model):
     transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE, unique=True)
