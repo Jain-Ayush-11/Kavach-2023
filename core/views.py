@@ -66,7 +66,7 @@ class WebsiteReportView(generics.GenericAPIView):
             return Response("url cannot be blank", status=status.HTTP_400_BAD_REQUEST)
         try:
             website_report = WebsiteReport.objects.get(url=url)
-            return redirect(f"https://www.criminalip.io/en/domain/report?scan_id={website_report.report_id}")
+            return Response({"url": f"https://www.criminalip.io/en/domain/report?scan_id={website_report.report_id}"})
         except WebsiteReport.DoesNotExist:
             report_url = get_website_report(url)
             if report_url is None:
