@@ -12,6 +12,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 from rest_framework import status
+from django.http import JsonResponse
 
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 
@@ -87,3 +88,6 @@ def node_view(request, address):
     node_link = tools_field.find_element(By.TAG_NAME, 'a').get_attribute('href')
     driver.quit()
     return redirect(node_link)
+
+def get_geofencer(request):
+    return JsonResponse({"url": "https://www.criminalip.io/en/asset/search?query=%22Bitcoin%22+port%3A+8333"})
