@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 class SocialMedia(models.Model):
+    address = models.CharField(max_length=512, blank=True, null=True)
     logo = models.URLField(null=True, blank=True)
     social_media = models.CharField(max_length=255, null=True, blank=True)
     link = models.URLField(null=True, blank=True)
@@ -32,3 +33,6 @@ class Watchlist(models.Model):
     email_template = models.TextField(null=True, blank=True)
     date = models.DateTimeField(null=True, blank=True)
 
+class WebsiteReport(models.Model):
+    url = models.URLField(unique=True, blank=True, null=True)
+    report_id = models.CharField(blank=True, null=True, max_length=500)
