@@ -56,8 +56,13 @@ class SocialMediaList(generics.ListAPIView):
 class TransactionDetail(generics.RetrieveAPIView):
     serializer_class = TransactionSerializer
 
-    def get_object(self):
-        return Transaction.objects.get(address=self.kwargs['pk'])
+    def get(self, request, *args, **kwargs):
+        try:
+            transaction = Transaction.objects.get(transactionHash=self.kwargs['pk'])
+            _serializer = TransactionSerializer(instance=transaction)
+            return Response(_serializer.data)
+        except Transaction.DoesNotExist:
+            return Response({'message':'Not Found'}, status=status.HTTP_400_BAD_REQUEST)
 
 class WatchlistList(generics.ListCreateAPIView):
     queryset = Watchlist.objects.all()
