@@ -13,7 +13,7 @@ class SocialMedia(models.Model):
     views = models.BigIntegerField(null=True, blank=True)
     profile_visited = models.BigIntegerField(null=True, blank=True)
     risk = models.CharField(max_length=255, default="High")
-    profile_summary = models.TextField(default="")
+    profile_summary = models.TextField(default="", blank=True, null=True)
 
 class Transaction(models.Model):
     transactionHash = models.CharField(max_length=64, blank=True, null=True)
@@ -24,6 +24,7 @@ class Transaction(models.Model):
     reciever_to = models.CharField(max_length=34, blank=True, null=True)
     reciever_amount = models.CharField(max_length=20, blank=True, null=True)
     time = models.DateTimeField(blank=True, null=True)
+    wallets = models.CharField(blank=True, null=True, max_length=500)
 
 
 class Watchlist(models.Model):
