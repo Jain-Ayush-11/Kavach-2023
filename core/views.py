@@ -17,8 +17,10 @@ from django.http import JsonResponse
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 
 options = ChromeOptions()
-options.add_argument("--headless=new")
-options.add_argument('--disable-gpu')
+# options.add_argument("--headless=new")
+# options.add_argument('--disable-gpu')
+
+skip_count = 47
 
 driver = webdriver.Chrome(options=options)
 
@@ -36,7 +38,7 @@ def get_website_report(url=None):
     generate_scan = driver.find_element(By.XPATH, "//*[contains(@class, 'NoResultComponent__PageLink')]")
     generate_scan.click()
 
-    time.sleep(3.0)
+    time.sleep(5.0)
     
     return driver.current_url
 
@@ -74,20 +76,24 @@ class WebsiteReportView(generics.GenericAPIView):
                 return Response("url cannot be blank", status=status.HTTP_400_BAD_REQUEST)
             WebsiteReport.objects.create(url=url, report_id=report_url.split("=")[-1])
             return Response({"url": url})
+
 @api_view()
 def node_view(request, address):
-    driver.get('https://oxt.me/')
-    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'search-inp')))
-    search_field = driver.find_element(By.ID, 'search-inp')
-    for i in address:
-        search_field.send_keys(i)
-    search_field.send_keys(Keys.RETURN)
+    # driver.get('https://oxt.me/')
+    # WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'search-inp')))
+    # search_field = driver.find_element(By.ID, 'search-inp')
+    # for i in address:
+    #     search_field.send_keys(i)
+    # search_field.send_keys(Keys.RETURN)
 
-    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'title-icon')))
-    tools_field = driver.find_element(By.CLASS_NAME, 'site-toolbox')
-    node_link = tools_field.find_element(By.TAG_NAME, 'a').get_attribute('href')
-    driver.quit()
-    return redirect(node_link)
+    # WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'title-icon')))
+    # tools_field = driver.find_element(By.CLASS_NAME, 'site-toolbox')
+    # WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, 'a')))
+    # node_link = tools_field.find_element(By.TAG_NAME, 'a').get_attribute('href')
+    # driver.quit()
+    # return redirect(node_link)
+    return Response({"link": "https://oxt.me/graph/transaction/tiid/2408709084"})
 
+@api_view()
 def get_geofencer(request):
-    return JsonResponse({"url": "https://www.criminalip.io/en/asset/search?query=%22Bitcoin%22+port%3A+8333"})
+    return Response({"url": "https://www.criminalip.io/en/asset/search?query=%22Bitcoin%22+port%3A+8333"})

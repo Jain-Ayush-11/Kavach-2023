@@ -16,6 +16,10 @@ class TransactionAdmin(CustomModelAdmin):
 class WatchlistAdmin(CustomModelAdmin):
     pass
 
+class WebsiteReportAdmin(CustomModelAdmin):
+    pass
+
 admin.site.register(models.SocialMedia, SocialMediaAdmin)
 admin.site.register(models.Transaction, TransactionAdmin)
 admin.site.register(models.Watchlist, WatchlistAdmin)
+admin.site.register(models.WebsiteReport, WebsiteReportAdmin)
