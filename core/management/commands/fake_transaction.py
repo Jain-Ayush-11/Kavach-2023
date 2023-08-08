@@ -10,7 +10,7 @@ fake = Faker()
 
 class Command(BaseCommand):
     help = 'Generate and save fake transaction data to the Transaction model'
-    def handle(self, *args: Any, **options: Any) -> str | None:
+    def handle(self, *args: Any, **options: Any) -> str :
 
         # Load data from a JSON file
         with open('data.json', 'r') as f:
