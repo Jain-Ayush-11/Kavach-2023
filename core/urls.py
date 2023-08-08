@@ -7,4 +7,5 @@ urlpatterns = [
     path('transaction/<slug:pk>/', views.TransactionDetail.as_view()),
     path('watchlist/', views.WatchlistList.as_view()),
     path('website-report/', views.WebsiteReportView.as_view()),
+    path('node/<slug:address>/', views.node_view),
 ]
