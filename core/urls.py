@@ -9,4 +9,7 @@ urlpatterns = [
     path('website-report/', views.WebsiteReportView.as_view()),
     path('node/<slug:address>/', views.node_view),
     path('geofencer/', views.get_geofencer),
+    path('demixer/', views.demixing),
+    path('destination-address/<slug:tx_id>/', views.get_dest),
+    path('report/', views.ReportView.as_view()),
 ]

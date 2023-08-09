@@ -23,3 +23,8 @@ class WatchlistSerializer(serializers.ModelSerializer):
         _response['transaction']=_transaction.data
         return _response
 
+class ReportSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Report
+        fields = '__all__'
+
