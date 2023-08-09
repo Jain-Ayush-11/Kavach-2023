@@ -16,6 +16,16 @@ class WatchlistSerializer(serializers.ModelSerializer):
         model = Watchlist
         fields = ['id', 'transaction', 'coin', 'type', 'notify', 'email_template', 'date']
 
+    def create(self, validated_data):
+        data = dict()
+        transaction = validated_data['transaction']
+        data['address'] = transaction.transactionHash
+        data['logo'] = transaction.logo
+        data['scam_reports'] = transaction.scam_reports
+        data['risk'] = 'In Progress'
+        SocialMedia.objects.create(**data)
+        return super().create(validated_data)
+
     def to_representation(self, instance):
         _response = super().to_representation(instance)
         transaction = Transaction.objects.get(id=_response['transaction'])
